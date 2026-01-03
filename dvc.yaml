@@ -1,0 +1,10 @@
+stages:
+  preprocess:
+    cmd: python Src/main.py
+    deps:
+    - Data/Raw_data/test.csv
+    - Data/Raw_data/train.csv
+    - Src/main.py
+    outs:
+    - Data/Processed/processed_test.csv
+    - Data/Processed/processed_train.csv
