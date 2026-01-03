@@ -84,3 +84,31 @@ stages:
       hash: md5
       md5: 4792fcf5117837c4c197627d01e41f9f
       size: 3577
+  train_random_forest:
+    cmd: python Src/main_random_forest.py
+    deps:
+    - path: Data/Split/X_train.csv
+      hash: md5
+      md5: 0ce93b21e29594800deb449602d1955c
+      size: 1114054
+    - path: Data/Split/y_train.csv
+      hash: md5
+      md5: 36170592f4645c38aba0135d0c6ba57f
+      size: 72017
+    - path: Src/main_random_forest.py
+      hash: md5
+      md5: 6c185a917b641c102ea9359949ca446e
+      size: 346
+    - path: Src/random_forest.py
+      hash: md5
+      md5: 2664644a3d7d4698d975b7acf20c4e23
+      size: 1638
+    outs:
+    - path: metrics/random_forest.txt
+      hash: md5
+      md5: 98937548d721445b2095fb13deb756d7
+      size: 13
+    - path: models/random_forest.pkl
+      hash: md5
+      md5: 2b4d2c7bd6addd1fa1b81b949d9ceb94
+      size: 4415161
