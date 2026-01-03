@@ -1,0 +1,86 @@
+schema: '2.0'
+stages:
+  preprocess:
+    cmd: python Src/main.py
+    deps:
+    - path: Data/Raw_data/test.csv
+      hash: md5
+      md5: 9219a8f71bb09c915eeff01aab89d688
+      size: 281301
+    - path: Data/Raw_data/train.csv
+      hash: md5
+      md5: 3dc4b1a585c7bc047d87cf9b72d8084f
+      size: 2532797
+    - path: Src/main.py
+      hash: md5
+      md5: f1860db0fd78a6a7177e0c296531b5ff
+      size: 935
+    outs:
+    - path: Data/Processed/processed_test.csv
+      hash: md5
+      md5: fdb9273c261326444c60a6e144af1a88
+      size: 164845
+    - path: Data/Processed/processed_train.csv
+      hash: md5
+      md5: e789aacf04042e363cf46d924a9c707d
+      size: 1482568
+  split:
+    cmd: python Src/main_split.py
+    deps:
+    - path: Data/Processed/processed_train.csv
+      hash: md5
+      md5: e789aacf04042e363cf46d924a9c707d
+      size: 1482568
+    - path: Src/main_split.py
+      hash: md5
+      md5: 0f6d140bd861b5f8eb1162959f48a870
+      size: 314
+    - path: Src/split.py
+      hash: md5
+      md5: 65bbeb1ca5248c21285de9ab6111aedc
+      size: 1342
+    outs:
+    - path: Data/Split/X_test.csv
+      hash: md5
+      md5: ad68599ea4674a5b0b91d145c7477461
+      size: 278646
+    - path: Data/Split/X_train.csv
+      hash: md5
+      md5: 0ce93b21e29594800deb449602d1955c
+      size: 1114054
+    - path: Data/Split/y_test.csv
+      hash: md5
+      md5: bb6287802918d37c9a527fcd247a1084
+      size: 18017
+    - path: Data/Split/y_train.csv
+      hash: md5
+      md5: 36170592f4645c38aba0135d0c6ba57f
+      size: 72017
+  train_decision_tree:
+    cmd: python Src/main_decision_tree.py
+    deps:
+    - path: Data/Split/X_train.csv
+      hash: md5
+      md5: 0ce93b21e29594800deb449602d1955c
+      size: 1114054
+    - path: Data/Split/y_train.csv
+      hash: md5
+      md5: 36170592f4645c38aba0135d0c6ba57f
+      size: 72017
+    - path: Src/decision_tree.py
+      hash: md5
+      md5: 294990a4469f2e82443c01a209f18d40
+      size: 1559
+    - path: Src/main_decision_tree.py
+      hash: md5
+      md5: 408189b8fc600c7f3dd9898eb295ccfb
+      size: 347
+    outs:
+    - path: metrics/decision_tree.txt
+      hash: md5
+      md5: 98937548d721445b2095fb13deb756d7
+      size: 13
+    - path: models/decision_tree.pkl
+      hash: md5
+      md5: 4792fcf5117837c4c197627d01e41f9f
+      size: 3577

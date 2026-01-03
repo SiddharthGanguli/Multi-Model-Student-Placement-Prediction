@@ -8,3 +8,34 @@ stages:
     outs:
     - Data/Processed/processed_test.csv
     - Data/Processed/processed_train.csv
+  split:
+    cmd: python Src/main_split.py
+    deps:
+    - Data/Processed/processed_train.csv
+    - Src/main_split.py
+    - Src/split.py
+    outs:
+    - Data/Split/X_test.csv
+    - Data/Split/X_train.csv
+    - Data/Split/y_test.csv
+    - Data/Split/y_train.csv
+  train_decision_tree:
+    cmd: python Src/main_decision_tree.py
+    deps:
+    - Data/Split/X_train.csv
+    - Data/Split/y_train.csv
+    - Src/decision_tree.py
+    - Src/main_decision_tree.py
+    outs:
+    - metrics/decision_tree.txt
+    - models/decision_tree.pkl
+  train_random_forest:
+    cmd: python Src/main_random_forest.py
+    deps:
+    - Data/Split/X_train.csv
+    - Data/Split/y_train.csv
+    - Src/main_random_forest.py
+    - Src/random_forest.py
+    outs:
+    - metrics/random_forest.txt
+    - models/random_forest.pkl
